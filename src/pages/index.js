@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import axios from 'axios';
 
 function Copyright() {
   return (
@@ -46,13 +47,40 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const handleSubmit = (e) => { 
-  e.preventDefault();
-  console.log('hello');
-}
-
 const SignIn = () => {
   const classes = useStyles();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errMsg, setErrMsg] = useState('');
+
+  const onChangeEmail = (e) => {
+    setEmail(e.target.value);
+  };
+  const onChangePassword = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const user = {
+      email,
+      password
+    }
+
+    axios.post('http://localhost:3000/api/signin', user)
+      .then(res => {
+        if (res.status === 200) {
+          console.log(res.data);
+        } else {
+          setErrMsg(res.data.error);
+        }
+      })
+      .catch(err => {
+        setErrMsg(err.response.data.error)
+        console.log(err.response.data.error);
+      });
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -65,6 +93,7 @@ const SignIn = () => {
           Sign in
         </Typography>
         <form className={classes.form} noValidate>
+          <p>{errMsg}</p>
           <TextField
             variant="outlined"
             margin="normal"
@@ -75,6 +104,7 @@ const SignIn = () => {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange={onChangeEmail}
           />
           <TextField
             variant="outlined"
@@ -86,6 +116,7 @@ const SignIn = () => {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={onChangePassword}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
