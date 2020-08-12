@@ -1,10 +1,16 @@
-import React from 'react';
-import cookie from 'js-cookie';
+import React, { useEffect } from 'react';
+import axios from 'axios';
 
 const Home = () => {
+
+    useEffect(() => {
+        axios.get('http://localhost:3000/api/cookieCheck')
+        .then(res => console.log(res.data));
+    }, [])
+
     return (
         <div>
-            Home
+            Home Page
         </div>
     );
 };

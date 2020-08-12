@@ -18,7 +18,7 @@ function signIn(req, res) {
             }
         })
     } catch (err) {
-        res.status(!200).send({ "error": "There was an error signing in" });
+        res.status(500).send({ "error": "There was an error signing in" });
         console.log(err);
     }
 }
