@@ -1,4 +1,5 @@
 import React from 'react';
+import cookie from 'js-cookie';
 
 const Home = () => {
     return (
