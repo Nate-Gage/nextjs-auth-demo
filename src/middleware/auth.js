@@ -3,19 +3,18 @@ const jwt = require('jsonwebtoken');
 const auth = async (req, res, next) => {
     try {
         // Looks for provided header
-        const cookieVal = req.header.cookie;
-        const token = cookieVal.replace('userToken=', '');
+        const authValue = req.headers.authorization;
+        const token = authValue.replace('Bearer ', '');
         //Validates user token
-        const decoded = jwt.verify(token, process.env.JWT_TOKEN);
-        console.log(decoded.user);
+        const decoded = jwt.verify(token, process.env.JWT_KEY);
 
-        if (user) {
+        if (decoded) {
+            req.headers.user = decoded.user;
             next()
         }
-a
+
     } catch (e) {
         res.status(401).send({ error: 'Please authenticate.' })
-        window.location='/';
     }
 }
 
