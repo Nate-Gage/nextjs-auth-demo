@@ -18,7 +18,7 @@ function signIn(req, res) {
     // Sets the jwt token as a cookie called 'userToken' in the response
     // and sends back the user object.
     try {
-        res.cookie('userToken', token);
+        res.cookie('userToken', token, { httpOnly: true });
         res.status(200).send(user);
     } catch (err) {
         res.status(500).send({ "error": "There was an error signing in" });
