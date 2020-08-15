@@ -9,12 +9,14 @@ const RequireAuthentication = (WrappedComponent) => {
 
             let isAuthenticated;
 
-            if (ctx.req.headers.cookie) {
-                const token = ctx.req.headers.cookie.replace('userToken=', '');
-                decoded = jwt.verify(token, process.env.JWT_KEY);
+            const token = ctx.req.headers.cookie?.replace('userToken=', '');
+            try {
+                isAuthenticated = jwt.verify(token, process.env.JWT_KEY);
+            } catch (e) {
+                console.log(e);
             }
 
-            if (isAuthenticated) {
+            if (isAuthenticated?.user) {
                 return WrappedComponent.getInitialProps(ctx);
             } else {
                 ctx.res.redirect('/')

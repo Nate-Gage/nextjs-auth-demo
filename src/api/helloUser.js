@@ -1,4 +1,4 @@
-const helloWorld = (req, res) => {
+const helloUser = (req, res) => {
     
     try {
         res.status(200).send({
@@ -11,5 +11,5 @@ const helloWorld = (req, res) => {
 };
 
 module.exports = {
-    helloWorld
+    helloUser
 }

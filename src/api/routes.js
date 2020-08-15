@@ -7,9 +7,9 @@ router.post('/signin', (req, res) => {
     signIn.signIn(req, res)
 });
 
-const helloWorld = require('./helloWorld');
+const helloUser = require('./helloUser');
 router.get('/helloWorld', auth, (req, res) => {
-    helloWorld.helloWorld(req, res);
+    helloUser.helloUser(req, res);
 })
 
 module.exports = router;
