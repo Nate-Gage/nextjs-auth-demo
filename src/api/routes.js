@@ -8,7 +8,7 @@ router.post('/signin', (req, res) => {
 });
 
 const helloUser = require('./helloUser');
-router.get('/helloWorld', auth, (req, res) => {
+router.get('/helloUser', auth, (req, res) => {
     helloUser.helloUser(req, res);
 })
 

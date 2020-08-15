@@ -8,14 +8,15 @@ const RequireAuthentication = (WrappedComponent) => {
         static getInitialProps(ctx) {
 
             let isAuthenticated;
-
             const token = ctx.req.headers.cookie?.replace('userToken=', '');
+
             try {
                 isAuthenticated = jwt.verify(token, process.env.JWT_KEY);
             } catch (e) {
                 console.log(e);
             }
 
+            // Use !isAuthenticated for error cases
             if (isAuthenticated?.user) {
                 return WrappedComponent.getInitialProps(ctx);
             } else {
@@ -30,6 +31,3 @@ const RequireAuthentication = (WrappedComponent) => {
 };
 
 export default RequireAuthentication;
-
-
-

@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import RequireAuthentication from '../pages/authHOC';
+import authReqHeader from '../utils/authReqHeader';
+import auth from '../middleware/auth';
 
 const Home = (props) => {
 
@@ -12,17 +14,13 @@ const Home = (props) => {
     );
 };
 
+// the RequireaAuthentication HOC processes before Home component's
+// getInitialProps runs
 Home.getInitialProps = async ctx => {
-
-    // const res = await axios.get('http://localhost:3000/api/helloWorld', {
-    //     headers: {
-    //       authorization: 'Bearer ' + ctx.req.headers.cookie.replace('userToken=', '') //the token is a variable which holds the token
-    //     }
-    //    });
+    const res = await axios.get('http://localhost:3000/api/helloUser', authReqHeader(ctx));
 
     return {
-        //greeting: res.data.greeting,
-        greeting: 'hello there'
+        greeting: res.data.greeting,
     };
 }
 

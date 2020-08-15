@@ -10,10 +10,13 @@ function signIn(req, res) {
         "NUID": "T16573"
     }
 
+    // creates JWT token
     const token = jwt.sign({
         user: user
-    }, process.env.JWT_KEY, { expiresIn: '1h' })
+    }, process.env.JWT_KEY, { expiresIn: '12h' })
 
+    // Sets the jwt token as a cookie called 'userToken' in the response
+    // and sends back the user object.
     try {
         res.cookie('userToken', token);
         res.status(200).send(user);
