@@ -6,17 +6,13 @@ function signIn(req, res) {
         "email": req.body.email,
         "error": "",
         "status": 200,
-        "UserName": "Gage, Nate",
-        "NUID": "T16573"
+        "UserName": "Doe, Jane",
     }
 
-    // creates JWT token
     const token = jwt.sign({
         user: user
     }, process.env.JWT_KEY, { expiresIn: '12h' })
 
-    // Sets the jwt token as a cookie called 'userToken' in the response
-    // and sends back the user object.
     try {
         res.cookie('userToken', token, { httpOnly: true });
         res.status(200).send(user);
@@ -29,4 +25,3 @@ function signIn(req, res) {
 module.exports = {
     signIn
 }
-
