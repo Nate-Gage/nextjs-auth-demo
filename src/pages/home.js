@@ -2,14 +2,16 @@ import React from 'react';
 import axios from 'axios';
 import RequireAuthentication from '../pages/authHOC';
 import authReqHeader from '../utils/authReqHeader';
-import auth from '../middleware/auth';
+import PropTypes from 'prop-types';
 
 const Home = (props) => {
+
+    const { greeting } = props;
 
     return (
         <div>
             Home Page
-            <p>{props.greeting}</p>
+            <p>{greeting}</p>
         </div>
     );
 };
@@ -22,6 +24,14 @@ Home.getInitialProps = async ctx => {
     return {
         greeting: res.data.greeting,
     };
+}
+
+Home.propTypes = {
+    greeting: PropTypes.string
+};
+
+Home.PropTypes = {
+
 }
 
 export default RequireAuthentication(Home);

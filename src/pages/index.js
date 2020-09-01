@@ -12,7 +12,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import axios from 'axios';
+import loginUser from '../utils/loginUser';
+
 
 
 function Copyright() {
@@ -26,7 +27,7 @@ function Copyright() {
       {'.'}
     </Typography>
   );
-};
+}
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -69,23 +70,11 @@ const SignIn = () => {
       password
     }
 
-    axios.post('http://localhost:3000/api/signin', user)
-      .then(res => {
-        if (res.status === 200) {
-          console.log(res.data);
-          window.location = '/home';        
-        } else {
-          setErrMsg(res.data.error);
-        }
-      })
-      .catch(err => {
-        setErrMsg(err.response.data.error)
-        console.log(err.response.data.error);
-      });
+    loginUser(user)
   }
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" data-test="signinComponent">
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>

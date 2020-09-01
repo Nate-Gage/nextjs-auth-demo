@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const logger = require('../utils/winston');
 
 const auth = async (req, res, next) => {
     try {
@@ -9,11 +10,13 @@ const auth = async (req, res, next) => {
         const decoded = jwt.verify(token, process.env.JWT_KEY);
 
         if (decoded) {
+            logger.debug('Token verified for user: ' + decoded.user);
             req.headers.user = decoded.user;
             next()
         }
 
     } catch (e) {
+        logger.error('User token NOT verified');
         res.status(401).send({ error: 'Please authenticate.' })
     }
 }

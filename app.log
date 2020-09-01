@@ -1,0 +1,12 @@
+2020-08-21T19:26:13.355Z info: A user signed in
+2020-08-21T19:28:47.088Z info: A user signed in
+2020-08-21T19:30:50.730Z info: A user signed in
+2020-08-21T19:30:50.733Z debug: this is debug
+2020-08-21T19:41:17.262Z debug: Entering signIn
+2020-08-21T19:41:17.267Z debug: user created at signIn: [object Object]
+2020-08-21T19:41:17.270Z debug: token created at signIn for : [object Object]
+2020-08-21T19:41:17.271Z debug: cookie created at signIn for: SADFASDF
+2020-08-21T19:43:32.603Z debug: Entering signIn
+2020-08-21T19:43:32.605Z debug: user created at signIn: sadfasd
+2020-08-21T19:43:32.607Z debug: token created at signIn for : sadfasd
+2020-08-21T19:43:32.608Z debug: cookie created at signIn for: sadfasd
