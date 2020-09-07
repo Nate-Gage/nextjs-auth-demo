@@ -5,8 +5,6 @@ function signIn(req, res) {
 
     const user = {
         "email": req.body.email,
-        "error": "",
-        "status": 200,
         "UserName": "Doe, Jane",
     }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import RequireAuthentication from '../pages/authHOC';
-import authReqHeader from '../utils/authReqHeader';
+import authReqHeader from '../requests/authReqHeader';
 import PropTypes from 'prop-types';
 
 const Home = (props) => {

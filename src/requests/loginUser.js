@@ -1,19 +1,17 @@
-import React from 'react';
 import axios from 'axios';
 
 const loginUser = (user) => {
-    axios.post('http://localhost:3000/api/signin', user)
+    axios.get('http://localhost:3000/api/signin')
         .then(res => {
             if (res.status === 200) {
-                console.log(res.data);
-                window.location = '/home';
+                //window.location = '/home';
+                return res.status(200).send({ user: { email: 'test@mail.com', password: 'testpass' } });
             } else {
                 setErrMsg(res.data.error);
             }
         })
         .catch(err => {
             setErrMsg(err.response.data.error)
-            console.log(err.response.data.error);
         })
 };
 
